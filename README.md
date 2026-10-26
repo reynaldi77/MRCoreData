@@ -25,6 +25,20 @@ Rewriting an entire Core Data persistence layer from scratch is often risky, tim
 
 ---
 
+## 📦 Installation via Swift Package Manager (SPM)
+
+You can add `MRCoreData` to your project using Xcode's Swift Package Manager:
+
+1. In Xcode, select **File** > **Add Package Dependencies...**
+2. Enter the repository URL:
+   ```text
+   https://github.com/reynaldi77/MRCoreData.git
+   ```
+3. In **Dependency Rule**, select **Up to Next Major Version** (or specify branch `main`).
+4. Choose **MRCoreData** and add it to your app target.
+
+---
+
 ## 🚀 Quick Start
 
 ### 1. Stack Initialization

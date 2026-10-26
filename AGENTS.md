@@ -34,6 +34,8 @@ This document is intended for human developers and **AI Agents** (LLM, Copilot, 
 
 ```
 MagicalRecord-Ext/
+├── Package.swift                                # Swift Package Manager manifest (MRCoreData)
+├── README.md                                    # Project overview & quick start
 ├── AGENTS.md                                    # Architectural context & instructions for AI Agents & Developers
 ├── CHANGELOG.md                                 # Version-by-version release history
 ├── Core/

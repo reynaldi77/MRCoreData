@@ -4,6 +4,16 @@ All notable changes to the `MagicalRecord-Ext` module are documented in this fil
 
 ---
 
+## [1.4.0] - 2026-10-26
+
+### Added
+- **Swift Package Manager (SPM) Support**:
+  - Added [Package.swift](file:///Users/reynaldiwidianto/Documents/project/MagicalRecord-Ext/Package.swift) defining the `MRCoreData` library target (compatible with iOS 12+, macOS 10.13+, tvOS 12+, and watchOS 4+).
+  - Xcode projects can now directly add this repository as an SPM dependency via `https://github.com/reynaldi77/MRCoreData.git`.
+  - Added installation guide in [README.md](file:///Users/reynaldiwidianto/Documents/project/MagicalRecord-Ext/README.md).
+
+---
+
 ## [1.3.1] - 2026-10-26
 
 ### Fixed
