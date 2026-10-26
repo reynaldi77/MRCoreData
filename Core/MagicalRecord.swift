@@ -20,10 +20,6 @@ public final class MagicalRecord: NSObject {
         set { _shouldDeleteStoreOnModelMismatch = newValue }
     }
     
-    @objc public static func setShouldDeleteStoreOnModelMismatch(_ shouldDelete: Bool) {
-        _shouldDeleteStoreOnModelMismatch = shouldDelete
-    }
-    
     /// Default context (viewContext) untuk operasi UI / read di main thread
     @objc public static var defaultContext: NSManagedObjectContext {
         guard let container = shared.persistentContainer else {
