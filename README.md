@@ -39,6 +39,31 @@ You can add `MRCoreData` to your project using Xcode's Swift Package Manager:
 
 ---
 
+## ⚡️ Project-Wide Integration (Swift & Objective-C)
+
+To minimize the effort of adding imports across an existing codebase:
+
+### 1. For Swift Files (Global / Instant)
+You **do not** need to add `import MRCoreData` to every Swift file. Simply create a single Swift file in your project (e.g., `GlobalImports.swift`) with the following line:
+
+```swift
+@_exported import MRCoreData
+```
+
+✨ **Result:** Every Swift file in your project will immediately have access to all `MRCoreData` extensions (`mr_findFirst`, `mr_createEntity`, etc.) without any per-file import statements.
+
+### 2. For Objective-C Files (Per-File Import)
+> ⚠️ **Important Note on Bridging Headers:**
+> **DO NOT** place `@import MRCoreData;` inside your `<Project>-Bridging-Header.h`. The bridging header is strictly a one-way mechanism to expose Objective-C to Swift. Putting a pure Swift SPM module import in the bridging header triggers circular dependency compiler errors.
+
+For remaining Objective-C (`.m`) files that use Core Data, import `MRCoreData` individually at the top of each `.m` implementation file:
+
+```objc
+@import MRCoreData;
+```
+
+---
+
 ## 🚀 Quick Start
 
 ### 1. Stack Initialization

@@ -134,8 +134,11 @@ When tasked with extending, modifying, or migrating code utilizing `MagicalRecor
    - Always use `@preconcurrency import CoreData` when importing CoreData in this module.
    - Configure `NSFetchRequest` prior to entering `context.performAndWait` blocks to prevent capturing non-Sendable `NSPredicate?` instances.
    - Return values directly from `context.performAndWait { return ... }` rather than mutating outer scope variables.
-5. **Preserve Core Data Thread-Safety:**
+5. **Import & Module Integration Rules:**
+   - **Swift:** Recommend `@_exported import MRCoreData` in a single shared file (e.g., `GlobalImports.swift`) so developers do not need to add `import MRCoreData` to every Swift file manually.
+   - **Objective-C:** **DO NOT** instruct users to place `@import MRCoreData;` inside `<Project>-Bridging-Header.h` (this causes circular dependency errors with Swift SPM packages). Users must add `@import MRCoreData;` directly in each `.m` implementation file that needs it.
+6. **Preserve Core Data Thread-Safety:**
    - Always wrap entity property mutations and fetch executions inside `context.performAndWait` or `context.perform` to avoid Core Data concurrency violations.
-6. **Log All Changes in `CHANGELOG.md` & `AGENTS.md` (STRICTLY IN ENGLISH):**
+7. **Log All Changes in `CHANGELOG.md` & `AGENTS.md` (STRICTLY IN ENGLISH):**
    - Every modification, fix, or addition must be promptly documented in both [CHANGELOG.md](file:///Users/reynaldiwidianto/Documents/project/MagicalRecord-Ext/CHANGELOG.md) and [AGENTS.md](file:///Users/reynaldiwidianto/Documents/project/MagicalRecord-Ext/AGENTS.md).
    - **Language Rule:** Both `CHANGELOG.md` and `AGENTS.md` **MUST ALWAYS be written and maintained in English** to ensure consistent readability across different international AI models and developer environments.

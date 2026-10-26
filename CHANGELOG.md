@@ -4,6 +4,15 @@ All notable changes to the `MagicalRecord-Ext` module are documented in this fil
 
 ---
 
+## [1.4.3] - 2026-10-26
+
+### Added
+- **Project-Wide Import Guidelines Documentation**:
+  - Documented `@_exported import MRCoreData` in [README.md](file:///Users/reynaldiwidianto/Documents/project/MagicalRecord-Ext/README.md) and [AGENTS.md](file:///Users/reynaldiwidianto/Documents/project/MagicalRecord-Ext/AGENTS.md) for instant global availability across all Swift files without per-file import overhead.
+  - Documented that remaining Objective-C (`.m`) files must import `@import MRCoreData;` individually per implementation file (explicitly warning against placing it in `<Project>-Bridging-Header.h` to prevent circular dependency errors).
+
+---
+
 ## [1.4.2] - 2026-10-26
 
 ### Changed
