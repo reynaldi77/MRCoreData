@@ -4,6 +4,15 @@ All notable changes to the `MagicalRecord-Ext` module are documented in this fil
 
 ---
 
+## [1.4.2] - 2026-10-26
+
+### Changed
+- **`mr_createEntity` Return Type Made Optional (`Self?`)**:
+  - Changed `mr_createEntity(in:) -> Self` to `mr_createEntity(in:) -> Self?`.
+  - Enhances backward compatibility for existing codebases that already use `guard let entity = Entity.mr_createEntity() else { ... }` or `if let` checks, preventing conditional binding compiler warnings/errors without requiring refactoring.
+
+---
+
 ## [1.4.1] - 2026-10-26
 
 ### Changed

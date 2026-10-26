@@ -6,7 +6,7 @@ public extension NSManagedObject {
     // MARK: - Swift-First Methods (Generic & Default Parameters)
     
     /// Membuat entity baru di dalam context yang ditentukan (default: MagicalRecord.defaultContext)
-    static func mr_createEntity(in context: NSManagedObjectContext = MagicalRecord.defaultContext) -> Self {
+    static func mr_createEntity(in context: NSManagedObjectContext = MagicalRecord.defaultContext) -> Self? {
         return context.performAndWait {
             Self(context: context)
         }

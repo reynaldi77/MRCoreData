@@ -109,7 +109,7 @@ NSArray *users = [User MR_findAllSortedBy:@"createdAt" ascending:NO withPredicat
 
 ```swift
 // Create
-let item = Item.mr_createEntity()
+guard let item = Item.mr_createEntity() else { return }
 item.title = "Grocery"
 NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
 

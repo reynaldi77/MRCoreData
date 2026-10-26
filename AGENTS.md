@@ -57,7 +57,7 @@ MagicalRecord-Ext/
 | **Setup Stack** | `[MagicalRecord setupCoreDataStackWithModelNamed:@"Model"];` | `MagicalRecord.setupCoreDataStack(withModelNamed: "Model")` |
 | **Model Mismatch** | `[MagicalRecord setShouldDeleteStoreOnModelMismatch:YES];` | `MagicalRecord.setShouldDeleteStoreOnModelMismatch(true)` |
 | **Default Context** | `[NSManagedObjectContext MR_defaultContext]` | `NSManagedObjectContext.mr_default()` |
-| **Create Entity** | `[Person MR_createEntity]` | `Person.mr_createEntity()` *(Generic Self)* |
+| **Create Entity** | `[Person MR_createEntity]` | `Person.mr_createEntity()` *(Generic Self?)* |
 | **Find First** | `[Person MR_findFirst]` | `Person.mr_findFirst()` *(Return type: Person?)* |
 | **Find All** | `[Person MR_findAll]` | `Person.mr_findAll()` *(Return type: [Person])* |
 | **Find All Sorted** | `[Person MR_findAllSortedBy:@"index" ascending:YES withPredicate:p]` | `Person.mr_findAllSorted(by: "index", ascending: true, with: p)` |
