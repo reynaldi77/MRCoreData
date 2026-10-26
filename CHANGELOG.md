@@ -4,6 +4,14 @@ All notable changes to the `MagicalRecord-Ext` module are documented in this fil
 
 ---
 
+## [1.4.1] - 2026-10-26
+
+### Changed
+- **Minimum Deployment Target**:
+  - Updated [Package.swift](file:///Users/reynaldiwidianto/Documents/project/MagicalRecord-Ext/Package.swift) minimum platform versions to **iOS 15+** (macOS 12+, tvOS 15+, watchOS 8+).
+
+---
+
 ## [1.4.0] - 2026-10-26
 
 ### Added
