@@ -140,5 +140,35 @@ When tasked with extending, modifying, or migrating code utilizing `MagicalRecor
 6. **Preserve Core Data Thread-Safety:**
    - Always wrap entity property mutations and fetch executions inside `context.performAndWait` or `context.perform` to avoid Core Data concurrency violations.
 7. **Log All Changes in `CHANGELOG.md` & `AGENTS.md` (STRICTLY IN ENGLISH):**
-   - Every modification, fix, or addition must be promptly documented in both [CHANGELOG.md](file:///Users/reynaldiwidianto/Documents/project/MagicalRecord-Ext/CHANGELOG.md) and [AGENTS.md](file:///Users/reynaldiwidianto/Documents/project/MagicalRecord-Ext/AGENTS.md).
+   - Every modification, fix, or addition must be promptly documented in both [CHANGELOG.md](file:///Users/detik/Downloads/AntiGravityDump/MRCoreData/CHANGELOG.md) and [AGENTS.md](file:///Users/detik/Downloads/AntiGravityDump/MRCoreData/AGENTS.md).
    - **Language Rule:** Both `CHANGELOG.md` and `AGENTS.md` **MUST ALWAYS be written and maintained in English** to ensure consistent readability across different international AI models and developer environments.
+8. **Strict Versioning, Tagging & GitHub Release Guidelines:**
+   Whenever performing a version bump (e.g. from `1.4.3` to `1.4.4` or higher):
+   - **Step 1: Determine Semantic Versioning (`MAJOR.MINOR.PATCH`)**:
+     - `PATCH`: Bug fixes, minor type refinement, or backward-compatible doc updates.
+     - `MINOR`: New features, method overloads, or extensions (always providing `@objc` bridge counterpart).
+     - `MAJOR`: Breaking changes or fundamental architectural shifts.
+   - **Step 2: Update `CHANGELOG.md`**:
+     - Add the new version header `## [X.Y.Z] - YYYY-MM-DD` and categorize changes under `### Added`, `### Changed`, or `### Fixed` in English.
+   - **Step 3: Commit Changes**:
+     ```bash
+     git add CHANGELOG.md AGENTS.md <affected-files>
+     git commit -m "chore(release): bump version to X.Y.Z"
+     ```
+   - **Step 4: Create Annotated Git Tag**:
+     - An annotated Git tag matching the exact version number is required so Xcode Swift Package Manager can resolve versioning rules (such as *"Up to Next Major Version"*):
+     ```bash
+     git tag -a X.Y.Z -m "Release X.Y.Z"
+     ```
+   - **Step 5: Push Commits and Tags to Remote**:
+     ```bash
+     git push origin <branch-name>
+     git push origin X.Y.Z
+     ```
+   - **Step 6: Publish GitHub Release**:
+     - Create a GitHub Release so the release appears on GitHub's sidebar under "Releases" with release notes:
+       - **Via GitHub Web UI:** Go to repository Releases -> "Draft a new release" -> choose tag `X.Y.Z` -> copy release notes from `CHANGELOG.md` -> click "Publish release".
+       - **Via GitHub CLI (`gh`):**
+         ```bash
+         gh release create X.Y.Z --title "vX.Y.Z" --notes-file <notes.md>
+         ```
