@@ -48,24 +48,14 @@ public extension NSManagedObject {
         let entityName = self.mr_entityName
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         fetchRequest.predicate = predicate
+        fetchRequest.returnsObjectsAsFaults = true
+        fetchRequest.includesPropertyValues = false
         
         return context.performAndWait {
-            let batchDelete = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-            batchDelete.resultType = .resultTypeObjectIDs
-            
             do {
-                if let result = try context.execute(batchDelete) as? NSBatchDeleteResult,
-                   let objectIDs = result.result as? [NSManagedObjectID] {
-                    let changes = [NSDeletedObjectsKey: objectIDs]
-                    NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [context])
-                    return true
+                guard let objects = try context.fetch(fetchRequest) as? [NSManagedObject] else {
+                    return false
                 }
-            } catch {
-                // Fallback manual jika SQLite batch delete gagal atau menggunakan in-memory store
-            }
-            
-            do {
-                let objects = try context.fetch(fetchRequest) as? [NSManagedObject] ?? []
                 for object in objects {
                     context.delete(object)
                 }

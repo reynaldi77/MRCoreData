@@ -137,8 +137,11 @@ When tasked with extending, modifying, or migrating code utilizing `MagicalRecor
 5. **Import & Module Integration Rules:**
    - **Swift:** Recommend `@_exported import MRCoreData` in a single shared file (e.g., `GlobalImports.swift`) so developers do not need to add `import MRCoreData` to every Swift file manually.
    - **Objective-C:** **DO NOT** instruct users to place `@import MRCoreData;` inside `<Project>-Bridging-Header.h` (this causes circular dependency errors with Swift SPM packages). Users must add `@import MRCoreData;` directly in each `.m` implementation file that needs it.
-6. **Preserve Core Data Thread-Safety:**
+6. **Preserve Core Data Thread-Safety & Deletion Integrity:**
    - Always wrap entity property mutations and fetch executions inside `context.performAndWait` or `context.perform` to avoid Core Data concurrency violations.
+   - **Do NOT Use `NSBatchDeleteRequest` for `mr_deleteAll`:**
+     - `NSBatchDeleteRequest` executes directly on SQLite disk storage and completely bypasses in-memory contexts. It does NOT invoke Core Data relationship cascade/nullify delete rules, leaves stale/cached entities in active contexts ("ghost data"), and ignores pending unsaved insertions.
+     - Always use context-level `context.fetch` (optimized with `returnsObjectsAsFaults = true` and `includesPropertyValues = false`) followed by individual `context.delete(object)` to preserve relationship consistency and in-memory cache integrity.
 7. **Log All Changes in `CHANGELOG.md` & `AGENTS.md` (STRICTLY IN ENGLISH):**
    - Every modification, fix, or addition must be promptly documented in both [CHANGELOG.md](file:///Users/detik/Downloads/AntiGravityDump/MRCoreData/CHANGELOG.md) and [AGENTS.md](file:///Users/detik/Downloads/AntiGravityDump/MRCoreData/AGENTS.md).
    - **Language Rule:** Both `CHANGELOG.md` and `AGENTS.md` **MUST ALWAYS be written and maintained in English** to ensure consistent readability across different international AI models and developer environments.

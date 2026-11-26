@@ -4,6 +4,21 @@ All notable changes to the `MagicalRecord-Ext` module are documented in this fil
 
 ---
 
+## [1.4.4] - 2026-11-26
+
+### Fixed
+- **Reliable Entity Deletion in `mr_deleteAll(matching:in:)`**:
+  - Replaced `NSBatchDeleteRequest` with standard context-level fetch & `context.delete(_:)` (configured with `returnsObjectsAsFaults = true` and `includesPropertyValues = false` for high memory efficiency).
+  - **Issue Resolved (Why `NSBatchDeleteRequest` Failed):**
+    - `NSBatchDeleteRequest` bypasses the managed object context and operates directly at the SQLite store level. As a result:
+      1. Objects already registered or loaded in memory contexts remained untouched ("ghost" / stale objects), making them appear as if they were never deleted when re-queried or displayed in UI.
+      2. Unsaved (pending) inserted or updated objects in memory contexts could not be detected or deleted by SQLite batch delete.
+      3. Core Data relationship delete rules (cascade, nullify, deny) and inverse relationship integrity were completely bypassed.
+      4. `NSManagedObjectContext.mergeChanges(fromRemoteContextSave:into:)` was insufficient to invalidate already retained object snapshots.
+  - Using direct `context.delete(_:)` for each matched object ensures 100% reliable behavior identical to iterating `object.mr_deleteEntity()`, honoring delete rules, keeping memory contexts synchronized, and committing changes seamlessly upon the next save.
+
+---
+
 ## [1.4.3] - 2026-10-26
 
 ### Added
